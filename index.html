@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhav Ranjan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e3d3b9;
+            --card-bg: #f4ecdf;
+            --text-main: #3a2e25;
+            --text-muted: #6b5849;
+            --border-color: #c8b59b;
+            --dark-brown: #2c211a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Loading Screen Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInOut 1.5s infinite alternate;
+        }
+
+        .loader-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .loader-content p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0.4; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            animation: pageLoad 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pageLoad {
+            to { opacity: 1; }
+        }
+
+        .website-container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 40px;
+            gap: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 480px;
+        }
+
+        .btn-about {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--dark-brown);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            width: fit-content;
+            transition: opacity 0.2s;
+        }
+
+        .btn-about:hover {
+            opacity: 0.9;
+        }
+
+        /* Book / Image Graphic Box */
+        .hero-graphic {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .polaroid-book {
+            background: #fff8ef;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transform: rotate(2deg);
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .polaroid-book img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .polaroid-caption {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Connect Section */
+        .connect-section {
+            padding: 60px 40px;
+            text-align: center;
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .connect-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .connect-section p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+        }
+
+        .connect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .connect-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px 25px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .connect-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .connect-icon {
+            font-size: 1.5rem;
+        }
+
+        .connect-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .connect-text span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .btn-contact {
+            background-color: var(--dark-brown);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-contact:hover {
+            opacity: 0.85;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-brown);
+            color: #d6ccc2;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .bio {
+                margin: 0 auto;
+            }
+            .btn-about {
+                margin: 0 auto;
+            }
+            .connect-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <h1>Madhav Ranjan</h1>
+            <p>"Every idea begins as a small sketch..."</p>
+        </div>
+    </div>
+
+    <div class="website-container">
+        <nav>
+            <div class="logo">Madhav Ranjan.</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">HOME</a></li>
+                <li><a href="#">ABOUT ME</a></li>
+                <li><a href="#">JOURNEY</a></li>
+                <li><a href="#">GALLERY</a></li>
+                <li><a href="#">THOUGHTS</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h3>Hi, I'm</h3>
+                <h1>Madhav Ranjan</h1>
+                <div class="tagline">Dreamer &bull; Learner &bull; Creator</div>
+                <p class="bio">
+                    A passionate creator and lifelong learner with a curious mind. I love exploring new ideas, capturing moments, and turning thoughts into something meaningful.
+                </p>
+                <a href="#" class="btn-about">
+                    <span>&#128100;</span> About Me
+                </a>
+            </div>
+            
+            <div class="hero-graphic">
+                <div class="polaroid-book">
+                    <img src="profile.jpg" alt="Madhav Ranjan">
+                    <div class="polaroid-caption">"Every idea begins as a small sketch in the mind."</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="connect-section">
+            <h2>Let's Connect</h2>
+            <p>You can contact me through any of the following. I'll get back to you as soon as possible!</p>
+            
+            <div class="connect-grid">
+                <div class="connect-card">
+                    <div class="connect-info">
+                        <div class="connect-icon">&#128247;</div>
+                        <div class="connect-text">
+                            <h4>Instagram</h4>
+                            <span>madhav.ranjan_</span>
+                        </div>
+                    </div>
+                    <a href="https://instagram.com/madhav_ranjan_" target="_blank" class="btn-contact">Contact &rarr;</a>
+                </div>
+
+                <div class="connect-card">
+                    <div class="connect-info">
+                        <div class="connect-icon">&#9993;</div>
+                        <div class="connect-text">
+                            <h4>Email</h4>
+                            <span>madhavranjan060@gmail.com</span>
+                        </div>
+                    </div>
+                    <a href="mailto:madhavranjan060@gmail.com" class="btn-contact">Contact &rarr;</a>
+                </div>
+
+                <div class="connect-card">
+                    <div class="connect-info">
+                        <div class="connect-icon">&#128488;</div>
+                        <div class="connect-text">
+                            <h4>Twitter / X</h4>
+                            <span>madhav_ranjan_</span>
+                        </div>
+                    </div>
+                    <a href="https://twitter.com" target="_blank" class="btn-contact">Contact &rarr;</a>
+                </div>
+
+                <div class="connect-card">
+                    <div class="connect-info">
+                        <div class="connect-icon">&#128204;</div>
+                        <div class="connect-text">
+                            <h4>Pinterest</h4>
+                            <span>madhav_ranjan_</span>
+                        </div>
+                    </div>
+                    <a href="https://pinterest.com" target="_blank" class="btn-contact">Contact &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            Designed & Developed by Madhav Ranjan &copy; 2026
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 800);
+        });
+    </script>
+
+</body>
+</html>
